@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-toolbar mode="ios">
+        <ion-buttons slot="start">
+            <ion-back-button text="" color="dark"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{ editing ? 'Editando' : 'Nova' }} Aeronave </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-row>
+        <ion-col class="ion-no-padding">
+            <ion-card class="m0" color="light" mode="ios">
+                <ion-card-content>
+                    <ion-row>
+                        <ion-col size="12" size-sm="12" size-md="12" size-lg="4">
+                            <ion-label class="fw-600" color="medium">Modelo</ion-label>
+                            <ion-input type="text" class="input-light" [(ngModel)]="airplane.modelo"></ion-input>
+                        </ion-col>
+                        <ion-col size="12" size-sm="12" size-md="6" size-lg="4">
+                            <ion-label class="fw-600" color="medium">Quantidade de assentos</ion-label>
+                            <ion-input type="number" class="input-light" [(ngModel)]="airplane.qtdAssentos"></ion-input>
+                        </ion-col>
+                        <ion-col size="12" size-sm="12" size-md="6" size-lg="4">
+                            <ion-label class="fw-600" color="medium">Quantidade de assentos especiais</ion-label>
+                            <ion-input type="number" class="input-light" [(ngModel)]="airplane.qtdAssentosEspeciais"></ion-input>
+                        </ion-col>
+                    </ion-row>
+                </ion-card-content>
+            </ion-card>
+
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="mt-20">
+        <ion-col size="12" size-sm="4">
+            <ion-button (click)="save()" expand="full" shape="round" mode="ios" color="success">
+                Salvar
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-content>

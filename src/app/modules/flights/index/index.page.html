@@ -1,0 +1,80 @@
+<ion-header>
+    <ion-toolbar mode="ios" color="dark">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Aeronaves</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-refresher class="text-darkprimary" slot="fixed" (ionRefresh)="get()">
+        <ion-refresher-content pullingText="Atualizar" refreshingSpinner="dots" refreshingText="Atualizando"></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-row>
+        <ion-col class="ion-no-padding">
+            <ion-list class="no-border mb-0" lines="full" mode="ios">
+                <!-- filter -->
+
+                <!-- header -->
+                <ion-item-divider color="frut2" mode="md">
+                    <ion-col size="2" size-md="1">CÓD.</ion-col>
+                    <ion-col>data de partida/ion-col>
+                    <ion-col>valor da passagem</ion-col>
+                </ion-item-divider>
+
+                <!-- items -->===
+                <ion-item-sliding *ngFor="let flight of flights" #slidingItem>
+                    <ion-item>
+                        <ion-col size="2" size-md="1">#{{ category.id }}</ion-col>
+                        <ion-col>
+                            {{ category.name }}
+                            <ion-icon name="star" color="warning" [hidden]="!category.favorite"></ion-icon>
+                        </ion-col>
+                        <ion-col>{{ category.department ? category.department.name : '' }}</ion-col>
+                        <ion-col size="2" *ifAuth="[{update: 'categories'}]" class="text-right">
+                            <ion-button [routerLink]="['/categories', category.id]" routerDirection="forward" expand="default" color="primary" *ifAuth="[{update: 'categories'}]">
+                                <fa-icon [icon]="['fas', 'pencil-alt']"></fa-icon>
+                            </ion-button>
+                        </ion-col>
+                    </ion-item>
+                    <ion-item-options>
+                        <ion-item-option color="danger" (click)="remove(category, $event, slidingItem)" *ifAuth="[{delete: 'categories'}]">
+                            <ion-icon slot="start" name="trash"></ion-icon>
+                            Remover
+                        </ion-item-option>
+                    </ion-item-options>
+                </ion-item-sliding>
+
+                <ng-container *ngIf="loading">
+                    <div *ngFor="let tr of trs">
+                        <ion-skeleton-text animated style="width: 100%; height: 50px"></ion-skeleton-text>
+                    </div>
+                </ng-container>
+
+                <ion-infinite-scroll threshold="30px" (ionInfinite)="paginate(null, $event)">
+                    <ion-infinite-scroll-content loadingSpinner="none"></ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+
+                <ion-row class="no-border" text-center *ngIf="total_of_data === categories.length && total_of_data>0">
+                    <ion-col>
+                        <ion-icon [hidden]="categories.length < 10" color="medium" class="mt-15" size="large" name="arrow-dropup-circle" float-right (click)="content.scrollToTop(500)"></ion-icon>
+                        <ion-label color="medium" class="p20">
+                            Todos os registros foram listados <ion-icon name="thumbs-up" color="medium"></ion-icon>
+                        </ion-label>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row color="light" text-center *ngIf="!loading && !categories.length">
+                    <ion-col>
+                        <ion-label padding-top padding-bottom>
+                            Não há registros.
+                        </ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-list>
+
+        </ion-col>
+    </ion-row>
+</ion-content>

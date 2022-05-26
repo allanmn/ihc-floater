@@ -1,0 +1,29 @@
+import { Component } from '@angular/core';
+import { Platform } from '@ionic/angular';
+import { DashboardPage } from './modules/dashboard/dashboard.page';
+
+@Component({
+    selector: 'app-root',
+    templateUrl: 'app.component.html',
+    styleUrls: ['app.component.scss'],
+})
+export class AppComponent {
+    rootPage: any = null;
+
+    public appPages = [
+        { title: 'Dashboard', url: '/dashboard', icon: 'pie-chart' },
+        { title: 'Aeronaves', url: '/airplanes', icon: 'airplane' },
+        { title: 'Vôos', url: '/flights', icon: 'cloud' }
+    ];
+    constructor(
+        platform: Platform,
+    ) {
+        platform.ready().then(() => {
+
+        });
+    }
+
+    private openPage() {
+        this.rootPage = DashboardPage;
+    }
+}

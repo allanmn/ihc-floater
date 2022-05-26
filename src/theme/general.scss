@@ -1,0 +1,24 @@
+ion-input,
+input {
+    border-radius: 0.45em !important;
+    padding: 0.6875rem 0.85rem !important;
+    color: var(--ion-color-dark3) !important;
+    width: 100%;
+}
+.input-light {
+    --background: var(--ion-color-dark);
+    background: var(--ion-color-dark);
+    --color: var(--ion-color-light) !important;
+    color: var(--ion-color-light) !important;
+    -webkit-appearance: none;
+    transition-duration: 0.15s;
+    transition-property: border, background-color, color, box-shadow;
+    transition-timing-function: ease-in;
+    border: 1px solid var(--ion-color-light);
+}
+.custom-popover {
+    --background: var(--ion-color-light) !important;
+    background: var(--ion-color-light) !important;
+    opacity: 0.8;
+}
+.searchbar-search-icon { display:none !important; width:0; height:0; }
