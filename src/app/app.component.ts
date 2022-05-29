@@ -13,6 +13,7 @@ export class AppComponent {
     public appPages = [
         { title: 'Dashboard', url: '/dashboard', icon: 'pie-chart' },
         { title: 'Aeronaves', url: '/airplanes', icon: 'airplane' },
+        { title: 'Passageiros', url: '/passengers', icon: 'user' },
         { title: 'Vôos', url: '/flights', icon: 'cloud' }
     ];
     constructor(
