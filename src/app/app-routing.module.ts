@@ -16,6 +16,10 @@ const routes: Routes = [
         loadChildren: () => import('./modules/airplanes/airplanes.module').then(m => m.AirplaneModule)
     },
     {
+        path: 'destinations',
+        loadChildren: () => import('./modules/destiny/destiny.module').then(m => m.DestinyModule)
+    },
+    {
         path: 'passengers',
         loadChildren: () => import('./modules/passengers/passenger.module').then(m => m.PassengerModule)
     },
