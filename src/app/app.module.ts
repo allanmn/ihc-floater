@@ -22,11 +22,13 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 };
 
 registerLocaleData(localePt)
+=======
+import { CreatePassengerComponentModule } from './modules/passengers/create/create.module';
 
 @NgModule({
     declarations: [AppComponent, ConfirmComponent],
     entryComponents: [ConfirmComponent],
-    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, CurrencyMaskModule],
+    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, CreatePassengerComponentModule, CurrencyMaskModule],
     providers: [
         // Grande sacada para formatar numeros e datas no formato brasileiro
         { provide: LOCALE_ID, useValue: 'pt-BR' },

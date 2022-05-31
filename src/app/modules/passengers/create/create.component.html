@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-toolbar mode="ios">
+        <ion-buttons mode="ios" slot="end">
+            <ion-button size="small" mode="ios" color="white" (click)="dismiss()">
+                Fechar
+            </ion-button>
+        </ion-buttons>
+        <ion-title>{{ editing ? 'Editando' : 'Nova' }} Passageiro </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-row>
+        <ion-col class="ion-no-padding">
+            <ion-card class="m0" color="light" mode="ios">
+                <ion-card-content>
+                    <ion-row>
+                        <ion-col size="12" size-sm="12" size-md="12" size-lg="12">
+                            <ion-label class="fw-600" color="medium">Nome</ion-label>
+                            <ion-input type="text" class="input-light" [(ngModel)]="passenger.name"></ion-input>
+                        </ion-col>
+                        <ion-col size="12" size-sm="12" size-md="12" size-lg="12">
+                            <ion-label class="fw-600" color="medium">Data de Nascimento</ion-label>
+                            <ion-datetime [(ngModel)]="passenger.birth_date" (ionChange)="debug()"></ion-datetime>
+                        </ion-col>
+                    </ion-row>
+                </ion-card-content>
+            </ion-card>
+
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="mt-20">
+        <ion-col size="12" size-sm="4">
+            <ion-button (click)="save()" expand="full" shape="round" mode="ios" color="success">
+                Salvar
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-content>

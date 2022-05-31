@@ -3,9 +3,9 @@
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Aeronaves</ion-title>
+        <ion-title>Passageiros</ion-title>
         <ion-buttons slot="end">
-            <ion-button mode="ios" [routerLink]="['/airplanes/create']">
+            <ion-button mode="ios" (click)="create()">
                 <ion-icon name="add-circle"></ion-icon>
             </ion-button>
             <ion-button mode="ios" (click)="toggleSearch()" color="{{ showFilter ? 'medium' : '' }}">
@@ -32,30 +32,24 @@
                 <!-- header -->
                 <ion-item-divider mode="ios">
                     <ion-col size="2">CÓD.</ion-col>
-                    <ion-col size="5">Modelo</ion-col>
-                    <ion-col size="3">Qtd. de Assentos</ion-col>
+                    <ion-col size="5">Nome</ion-col>
+                    <ion-col size="3">Data de nascimento</ion-col>
                     <ion-col size="2"></ion-col>
                 </ion-item-divider>
 
                 <!-- items -->
-                <ion-item-sliding *ngFor="let airplane of airplanes" #slidingItem>
+                <ion-item-sliding *ngFor="let passenger of passengers ; let i = index" #slidingItem>
                     <ion-item>
-                        <ion-col size="2">#{{ airplane.id }}</ion-col>
+                        <ion-col size="2">#{{ passenger.id }}</ion-col>
                         <ion-col size="5">
-                            {{ airplane.modelo }}
+                            {{ passenger.name }}
                         </ion-col>
-                        <ion-col size="3">
-                            Normais: {{ airplane.qtdAssentos }}
-                            <br>
-                            <small>
-                                Especiais: {{ airplane.qtdAssentosEspeciais }}
-                            </small>
-                        </ion-col>
+                        <ion-col size="3">{{ passenger.birth_date }}</ion-col>
                         <ion-col size="2" class="text-right">
-                            <ion-button [routerLink]="['/airplanes', airplane.id]" routerDirection="forward" expand="default" color="primary">
+                            <ion-button (click)="update(i)" routerDirection="forward" expand="default" color="primary">
                                 <ion-icon name="pencil"></ion-icon>
                             </ion-button>
-                            <ion-button expand="default" (click)="remove($event, airplane.id)" color="danger">
+                            <ion-button expand="default" (click)="remove($event, passenger.id)" color="danger">
                                 <ion-icon name="trash"></ion-icon>
                             </ion-button>
                         </ion-col>
@@ -68,7 +62,7 @@
                     </div>
                 </ng-container>
 
-                <ion-row class="no-border text-center mt-15" *ngIf="airplanes.length">
+                <ion-row class="no-border text-center mt-15" *ngIf="passengers.length">
                     <ion-col>
                         <ion-label color="medium" class="p20">
                             Todos os registros foram listados <ion-icon name="thumbs-up" color="medium"></ion-icon>
@@ -76,7 +70,7 @@
                     </ion-col>
                 </ion-row>
 
-                <ion-row color="light" class="text-center" *ngIf="!loading && !airplanes.length">
+                <ion-row color="light" class="text-center" *ngIf="!loading && !passengers.length">
                     <ion-col>
                         <ion-label class="padding-top padding-bottom">
                             Não há registros.
