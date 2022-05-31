@@ -22,7 +22,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 };
 
 registerLocaleData(localePt)
-=======
 import { CreatePassengerComponentModule } from './modules/passengers/create/create.module';
 
 @NgModule({
