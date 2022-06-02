@@ -4,6 +4,7 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { BaseModule } from 'src/app/helpers/base.module';
 
 import { CreatePage } from './create.page';
+
 const routes: Routes = [
     {
         path: '',
@@ -17,6 +18,6 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         CurrencyMaskModule
     ],
-    declarations: [CreatePage],
+    declarations: [CreatePage]
 })
-export class CreateAirplanePageModule { }
+export class CreateFlightPageModule { }

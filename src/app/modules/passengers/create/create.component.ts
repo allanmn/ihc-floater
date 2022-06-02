@@ -94,8 +94,9 @@ export class CreatePassengerComponent implements OnInit {
             this.helper_service.toast('danger', 'Ocorreu um erro ao atualizar a aeronave')
         }
     }
+
     async dismiss() {
-        await this.modalController.dismiss();
+        await this.modalController.dismiss(this.passenger);
     }
 
     debug(){

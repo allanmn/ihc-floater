@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 // import { NgxMaskModule } from 'ngx-mask'
 // import { CurrencyMaskModule } from "ng2-currency-mask";
@@ -24,18 +25,13 @@ import { IonicModule } from '@ionic/angular';
         CommonModule,
         FormsModule,
         IonicModule,
-        // NgxMaskModule.forRoot(),
-        // CurrencyMaskModule,
     ],
     exports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        // NgxMaskModule,
-        // CurrencyMaskModule,
     ],
     providers: [
-        // { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
     ]
 })
 export class BaseModule { }

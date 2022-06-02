@@ -3,7 +3,7 @@
         <ion-buttons slot="start">
             <ion-back-button text="" color="dark"></ion-back-button>
         </ion-buttons>
-        <ion-title>{{ editing ? 'Editando' : 'Nova' }} Destino </ion-title>
+        <ion-title>{{ editing ? 'Editando' : 'Novo' }} Destino </ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -17,7 +17,7 @@
                             <ion-label class="fw-600" color="medium">Nome do destino</ion-label>
                             <ion-input type="text" class="input-light" [(ngModel)]="destiny.name"></ion-input>
                         </ion-col>
-                        <ion-col size="12" size-sm="12" size-md="6" size-lg="6">
+                        <ion-col size="12" size-sm="12" size-md="12" size-lg="6">
                             <ion-label class="fw-600" color="medium">Taxa de embarque</ion-label>
                             <input type="text" class="input-light" [(ngModel)]="destiny.tax" currencyMask>
                         </ion-col>

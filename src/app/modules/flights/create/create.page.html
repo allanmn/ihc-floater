@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-toolbar mode="ios">
+        <ion-buttons slot="start">
+            <ion-back-button text="" color="dark"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{ editing ? 'Editando' : 'Novo' }} Vôo </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-row>
+        <ion-col class="ion-no-padding">
+            <ion-card class="m0" color="light" mode="ios">
+                <ion-card-content>
+                    <ion-row>
+                        <ion-col size="12" size-sm="12" size-md="6" size-lg="4">
+                            <ion-label class="fw-600" color="medium">Valor da passagem</ion-label>
+                            <input type="text" class="input-light" [(ngModel)]="flight.valorPassagem" currencyMask />
+                        </ion-col>
+                        <ion-col size="12" size-sm="12" size-md="6" size-lg="4">
+                            <ion-label class="fw-600" color="medium">Data partida</ion-label>
+                            <ion-input class="input-light" readonly value="{{ flight.dataPartida | date: 'dd/MM/yyyy HH:mm' }}" id="date" placeholder="Selecionar data"></ion-input>
+                            <ion-popover class="date-popover" trigger="date" show-backdrop="false">
+                                <ng-template>
+                                    <ion-datetime #popoverDatetime [(ngModel)]="flight.dataPartida" presentation="date-time" (ionChange)="flight.dataPartida = popoverDatetime.value;" doneText="Selecionar" showDefaultTimeLabel="false" showDefaultButtons="true" cancelText="">
+                                    </ion-datetime>
+                                </ng-template>
+                            </ion-popover>
+                        </ion-col>
+                        <ion-col size="12" size-sm="12" size-md="6" size-lg="4">
+                            <ion-label class="fw-600" color="medium">Destino</ion-label>
+                            <ion-select class="input-light" value="" multiple="false" [(ngModel)]="destiny_id" placeholder="Selecione o destino" cancelText="Cancelar" okText="Selecionar" [disabled]="loading_destinations">
+                                <ion-select-option *ngFor="let destiny of destinations" value="{{destiny.id}}">{{ destiny.name }}</ion-select-option>
+                            </ion-select>
+                        </ion-col>
+                        <ion-col size="12" size-sm="12" size-md="6" size-lg="4">
+                            <ion-label class="fw-600" color="medium">Aeronave</ion-label>
+                            <ion-select value="" multiple="false" class="input-light" cancelText="Cancelar" okText="Selecionar" [(ngModel)]="airplane_id" placeholder="Selecione a aeronave" [disabled]="loading_airplanes">
+                                <ion-select-option *ngFor="let airplane of airplanes" value="{{airplane.id}}">{{ airplane.modelo }}</ion-select-option>
+                            </ion-select>
+                        </ion-col>
+                    </ion-row>
+                </ion-card-content>
+            </ion-card>
+
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="mt-20">
+        <ion-col size="12" size-sm="4">
+            <ion-button (click)="save()" expand="full" shape="round" mode="ios" color="success">
+                Salvar
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-content>

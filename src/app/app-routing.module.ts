@@ -25,7 +25,7 @@ const routes: Routes = [
     },
     {
         path: 'flights',
-        loadChildren: () => import('./modules/airplanes/index/index.module').then(m => m.IndexPageModule)
+        loadChildren: () => import('./modules/flights/flights.module').then(m => m.FlightModule)
     },
 ];
 
