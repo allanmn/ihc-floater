@@ -67,7 +67,7 @@ export class CreatePage implements OnInit {
 
         } catch (error) {
             this.helper_service.toast('danger', 'Ocorreu um erro ao salvar as informações da aeronave.');
-            console.log(error)
+            console.error(error)
         }
     }
 
@@ -82,7 +82,7 @@ export class CreatePage implements OnInit {
             }
 
         } catch (error) {
-            console.log(error);
+            console.error(error);
             this.helper_service.toast('danger', 'Ocorreu um erro ao atualizar a aeronave')
         }
     }

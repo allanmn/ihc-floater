@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertController, PopoverController } from '@ionic/angular';
+import { AlertController, PopoverController, ModalController } from '@ionic/angular';
 import { ConfirmComponent } from 'src/app/components/ConfirmComponent/confirm.component';
 import { HelperService } from 'src/app/helpers/helper.service';
-import { Destiny } from '../destiny';
-import { DestinyService } from '../destiny.service';
+import { CreatePage } from '../create/create.page';
+import { PassengerFlight } from '../passengerFlight';
+import { PassengerFlightService } from '../passengerFlight.service';
 
 @Component({
     selector: 'app-index',
@@ -14,7 +15,7 @@ export class IndexPage implements OnInit {
     @ViewChild('search', { static: false }) search: any;
 
     loading: boolean = true;
-    destinations: Array<Destiny> = [];
+    passengers: PassengerFlight[] = [];
 
     showFilter: boolean = false;
     filters: any = {
@@ -22,7 +23,7 @@ export class IndexPage implements OnInit {
     }
 
     constructor(
-        private airplane_service: DestinyService,
+        private passenger_service: PassengerFlightService,
         private helper_service: HelperService,
     ) { }
 
@@ -42,21 +43,26 @@ export class IndexPage implements OnInit {
         }
     }
 
-    get() {
+    get(ionRefresher: any = null) {
         try {
-            this.destinations = [];
-            let data = this.airplane_service.get();
+            this.passengers = [];
+            let data = this.passenger_service.get();
 
             if (data) {
-                for (let airplane of data) {
-                    this.destinations.push(airplane);
+                for (let passenger of data) {
+                    this.passengers.push(passenger);
                 }
 
                 if (this.filters.name) {
-                    this.destinations.filter(d => d.name.match(this.filters.name))
+
+                    this.passengers.filter(a => a.name.match(this.filters.name))
                 }
+
             } else {
 
+            }
+            if (ionRefresher) {
+                ionRefresher.target.complete();
             }
 
             this.loading = false;
@@ -89,14 +95,14 @@ export class IndexPage implements OnInit {
 
     async delete(id: number) {
         try {
-            let response = this.airplane_service.delete(id);
+            let response = this.passenger_service.delete(id);
 
             if (response) {
                 this.get();
             }
         } catch (error) {
             console.error(error);
-            this.helper_service.toast('danger', 'Ocorreu um erro ao remover avião')
+            this.helper_service.toast('danger', 'Ocorreu um erro ao remover passageiro')
         }
     }
 }

@@ -63,7 +63,7 @@ export class IndexPage implements OnInit {
             this.loading = false;
         } catch (error) {
             this.helper_service.toast('danger', 'Ocorreu um erro ao recuperar os dados das aeronaves.');
-            console.log(error)
+            console.error(error)
         }
     }
 
@@ -96,7 +96,7 @@ export class IndexPage implements OnInit {
                 this.get();
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
             this.helper_service.toast('danger', 'Ocorreu um erro ao remover avião')
         }
     }

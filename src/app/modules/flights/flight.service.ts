@@ -23,16 +23,18 @@ export class FlightService {
 
         let flights: Array<Flight> = [];
 
-        for (let flight of data) {
-            for (let relation of relations) {
-                if (relation == 'destiny') {
-                    let destinations = [];
-                    this.destiny_service.get().map(d => destinations.push(new Destiny(d)));
-                    let destiny = destinations.find(d => d.id === flight.destiny_id);
-                    flight.destiny = new Destiny(destiny);
+        if (data) {
+            for (let flight of data) {
+                for (let relation of relations) {
+                    if (relation == 'destiny') {
+                        let destinations = [];
+                        this.destiny_service.get().map(d => destinations.push(new Destiny(d)));
+                        let destiny = destinations.find(d => d.id === flight.destiny_id);
+                        flight.destiny = new Destiny(destiny);
+                    }
                 }
+                flights.push(flight);
             }
-            flights.push(flight);
         }
 
         return flights;
@@ -56,76 +58,76 @@ export class FlightService {
     }
 
 
-create(flight: Flight) {
-    try {
-        let data = JSON.parse(localStorage.getItem('floater@flights'))
-        if (data) {
-            let flights = data;
-            let idOk = false;
+    create(flight: Flight) {
+        try {
+            let data = JSON.parse(localStorage.getItem('floater@flights'))
+            if (data) {
+                let flights = data;
+                let idOk = false;
 
-            while (!idOk) {
-                let id = Math.floor(Math.random() * 100);
+                while (!idOk) {
+                    let id = Math.floor(Math.random() * 100);
 
-                if (!flights.find(a => a.id == id)) {
-                    flight.id = id;
-                    idOk = true;
+                    if (!flights.find(a => a.id == id)) {
+                        flight.id = id;
+                        idOk = true;
+                    }
                 }
-            }
 
-            flights.push(flight);
-            localStorage.setItem('floater@flights', JSON.stringify(flights));
-        } else {
-            let flights = [];
-            let idOk = false;
-            while (!idOk) {
-                let id = Math.floor(Math.random() * 100);
+                flights.push(flight);
+                localStorage.setItem('floater@flights', JSON.stringify(flights));
+            } else {
+                let flights = [];
+                let idOk = false;
+                while (!idOk) {
+                    let id = Math.floor(Math.random() * 100);
 
-                if (!flights.find(a => a.id == id)) {
-                    flight.id = id;
-                    idOk = true;
+                    if (!flights.find(a => a.id == id)) {
+                        flight.id = id;
+                        idOk = true;
+                    }
                 }
+                flights.push(flight);
+                localStorage.setItem('floater@flights', JSON.stringify(flights));
             }
-            flights.push(flight);
-            localStorage.setItem('floater@flights', JSON.stringify(flights));
+            return flight;
+        } catch (error) {
+            throw error;
         }
-        return flight;
-    } catch (error) {
-        throw error;
     }
-}
 
-update(flight: Flight) {
-    try {
-        let flights = JSON.parse(localStorage.getItem('floater@flights'));
+    update(flight: Flight) {
+        try {
+            let flights = JSON.parse(localStorage.getItem('floater@flights'));
 
-        let index = flights.indexOf(flights.find(a => a.id == flight.id));
+            let index = flights.indexOf(flights.find(a => a.id == flight.id));
 
-        flight = new Flight(flight);
+            flight = new Flight(flight);
 
-        flights[index] = flight;
-
-        localStorage.setItem('floater@flights', JSON.stringify(flights));
-
-        return true;
-    } catch (error) {
-        throw error;
-    }
-}
-
-delete (id: number) {
-    try {
-        let data = JSON.parse(localStorage.getItem('floater@flights'));
-
-        if (data) {
-            let flights = data;
-            flights = flights.filter(a => a.id !== id);
+            flights[index] = flight;
 
             localStorage.setItem('floater@flights', JSON.stringify(flights));
 
             return true;
+        } catch (error) {
+            throw error;
         }
-    } catch (error) {
-        throw error;
     }
-}
+
+    delete(id: number) {
+        try {
+            let data = JSON.parse(localStorage.getItem('floater@flights'));
+
+            if (data) {
+                let flights = data;
+                flights = flights.filter(a => a.id !== id);
+
+                localStorage.setItem('floater@flights', JSON.stringify(flights));
+
+                return true;
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
 }
