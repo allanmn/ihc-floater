@@ -32,7 +32,6 @@ export class DestinyService {
 
                 while (!idOk) {
                     let id = Math.floor(Math.random() * 100);
-                    console.log(id);
 
                     if (!destinations.find(a => a.id == id)) {
                         destiny.id = id;

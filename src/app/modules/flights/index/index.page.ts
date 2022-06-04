@@ -46,7 +46,6 @@ export class IndexPage implements OnInit {
             let data = this.flight_service.get(['destiny']);
 
             if (data) {
-                console.log(data)
                 for (let flight of data) {
                     this.flights.push(flight);
                 }

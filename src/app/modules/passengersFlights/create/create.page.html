@@ -3,7 +3,7 @@
         <ion-buttons slot="start">
             <ion-back-button text="" color="dark"></ion-back-button>
         </ion-buttons>
-        <ion-title>{{ editing ? 'Editando' : 'Novo' }} Passagem</ion-title>
+        <ion-title (click)="debug()">{{ editing ? 'Editando' : 'Novo' }} Passagem </ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -13,13 +13,61 @@
             <ion-card class="m0" color="light" mode="ios">
                 <ion-card-content>
                     <ion-row>
-                        <ion-col size="12" size-sm="12" size-md="12" size-lg="12">
-                            <ion-label class="fw-600" color="medium">Nome</ion-label>
-                            <ion-input type="text" class="input-light" [(ngModel)]="passenger.name"></ion-input>
+                        <ion-col size="6">
+                            <ion-label class="fw-600" color="medium">Voô*</ion-label>
+                            <ion-select class="input-light m4" value="" multiple="false" [(ngModel)]="passenger_flight.flight_id" placeholder="Selecione o destino" cancelText="Cancelar" okText="Selecionar" [disabled]="loading_destinations">
+                                <ion-select-option *ngFor="let flight of flights" value="{{flight.id}}">{{ flight.destiny.name }}  Data:{{ flight.dataPartida | date: 'dd/MM/yyyy HH:mm' }}</ion-select-option>
+                            </ion-select>
                         </ion-col>
-                        <ion-col size="12" size-sm="12" size-md="12" size-lg="12">
-                            <ion-label class="fw-600" color="medium">Data de Nascimento</ion-label>
-                            <ion-datetime [(ngModel)]="passenger.birth_date"></ion-datetime>
+                        <ion-col size="6">
+                            <ion-label class="fw-600" color="medium">Passageiro*</ion-label>
+                            <ion-button *ngIf="!passenger" class="btn light" (click)="createPassenger()" expand="block" fill="clear" shape="round">
+                                Adicionar
+                            </ion-button>
+                            <ion-row *ngIf="passenger">
+                                <ion-col class="passenger-name" size="6">
+                                    {{passenger.name}}
+                                </ion-col>
+                                <ion-col size="6">
+                                    <ion-button class="btn btn-danger" color="light" (click)="remove($event)" expand="block" fill="clear" shape="round">
+                                        Remover
+                                    </ion-button>
+                                </ion-col>
+                            </ion-row>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="6">
+                            <ion-label class="fw-600" color="medium">Número Assento*</ion-label>
+                            <ion-input type="number" (keypress)="numberOnlyValidation($event)" class="input-light" [(ngModel)]="passenger_flight.seatNumber"></ion-input>
+                        </ion-col>
+                        <ion-col size="6">
+                            <ion-label class="fw-600" color="medium">Tipo Assento*</ion-label>
+                            <ion-select class="input-light m4" value="" multiple="false" [(ngModel)]="passenger_flight.seatType" placeholder="Selecione o tipo de assento" cancelText="Cancelar" okText="Selecionar">
+                                <ion-select-option value="normal">Normal</ion-select-option>
+                                <ion-select-option value="especial">Especial</ion-select-option>
+                            </ion-select>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-label class="fw-600" color="medium">Solicitações</ion-label>
+                            <ion-textarea class="light btn" color="light" [(ngModel)]="passenger_flight.solicitations" ></ion-textarea>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="6">
+                            <ion-label class="fw-600" color="medium">Método de Pagamento*</ion-label>
+                            <ion-select class="input-light m4" value="" multiple="false" [(ngModel)]="passenger_flight.payment_method" placeholder="Selecione o metodo de pagamento" cancelText="Cancelar" okText="Selecionar">
+                                <ion-select-option value="boleto">Boleto</ion-select-option>
+                                <ion-select-option value="credito">Crédito</ion-select-option>
+                                <ion-select-option value="debito">Débito</ion-select-option>
+                                <ion-select-option value="pix">Pix</ion-select-option>
+                            </ion-select>
+                        </ion-col>
+                        <ion-col size="6">
+                            <ion-label class="fw-600" color="medium">Valor Pago*</ion-label>
+                            <input type="text" class="input-light" [(ngModel)]="passenger_flight.payed_value" currencyMask/>
                         </ion-col>
                     </ion-row>
                 </ion-card-content>

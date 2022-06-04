@@ -94,8 +94,10 @@ export class CreatePage implements OnInit {
         if (!this.airplane_id) this.helper_service.toast('warning', 'Selecione uma aeronave.')
         if (!this.destiny_id) this.helper_service.toast('warning', 'Selecione um destino.')
 
-        this.flight.airplane_id = parseInt(this.airplane_id);
-        this.flight.destiny_id = parseInt(this.destiny_id);
+        console.log(this.airplane_id,this.destiny_id)
+
+        this.flight.airplane_id = Number(this.airplane_id);
+        this.flight.destiny_id = Number(this.destiny_id);
 
         if (this.id > 0) {
             this.update();

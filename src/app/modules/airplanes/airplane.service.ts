@@ -31,7 +31,6 @@ export class AirPlaneService {
 
                 while(!idOk) {
                     let id = Math.floor(Math.random() *100);
-                    console.log(id);
 
                     if (!airplanes.find(a => a.id == id)) {
                         airplane.id = id;

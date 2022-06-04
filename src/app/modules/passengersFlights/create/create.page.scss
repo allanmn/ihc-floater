@@ -101,3 +101,25 @@ ion-icon[name="book"] {
   justify-content: center;
   text-align: center;
 }
+.light{
+  background-color: #fff;
+}
+.btn{
+  border-radius: 8px;
+}
+.btn-danger{
+  border-radius: 8px;
+  background-color: rgb(255, 0, 0);
+}
+.passenger-name{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.m4{
+  margin: 4px 2px;
+}
+ion-input {
+  direction: rtl;
+}

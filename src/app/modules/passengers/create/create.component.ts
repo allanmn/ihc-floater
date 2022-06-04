@@ -66,13 +66,8 @@ export class CreatePassengerComponent implements OnInit {
             }
             this.passenger = new Passenger(this.passenger);
             this.passenger.birth_date = moment(this.passenger.birth_date).format('DD/MM/YYYY')
-            let response = this.passenger_service.create(this.passenger);
 
-            if (response) {
-                this.helper_service.toast('success', 'Aeronave cadastrada com sucesso');
-            }
-
-            this.modalController.dismiss();
+            this.modalController.dismiss(this.passenger);
         } catch (error) {
             this.helper_service.toast('danger', 'Ocorreu um erro ao salvar as informações da aeronave.');
             console.error(error)
@@ -81,12 +76,20 @@ export class CreatePassengerComponent implements OnInit {
 
     update() {
         try {
+            if(!this.passenger.name){
+                this.helper_service.toast('danger','Por favor preencha o nome')
+                return
+            }
+            if(!this.passenger.birth_date){
+                this.helper_service.toast('danger','Por favor preencha a data de nascimento')
+                return
+            }
+
             this.passenger.birth_date = moment(this.passenger.birth_date).format('DD/MM/YYYY')
             let response = this.passenger_service.update(this.passenger);
 
             if (response) {
-                this.helper_service.toast('success', 'Aeronave atualizada com sucesso');
-                this.modalController.dismiss();
+                this.modalController.dismiss(this.passenger);
             }
 
         } catch (error) {
@@ -96,7 +99,7 @@ export class CreatePassengerComponent implements OnInit {
     }
 
     async dismiss() {
-        await this.modalController.dismiss(this.passenger);
+        await this.modalController.dismiss();
     }
 
     debug(){

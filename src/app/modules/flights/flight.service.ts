@@ -21,7 +21,7 @@ export class FlightService {
 
         let data = JSON.parse(localStorage.getItem('floater@flights'));
 
-        let flights: Array<Flight> = [];
+        let flights: Flight[] = [];
 
         if (data) {
             for (let flight of data) {
@@ -31,6 +31,12 @@ export class FlightService {
                         this.destiny_service.get().map(d => destinations.push(new Destiny(d)));
                         let destiny = destinations.find(d => d.id === flight.destiny_id);
                         flight.destiny = new Destiny(destiny);
+                    }
+                    if (relation == 'airplane') {
+                        let airplanes = [];
+                        this.airplane_service.get().map(a => airplanes.push(new Airplane(a)));
+                        let airplane = airplanes.find(a => a.id === flight.airplane_id);
+                        flight.airplane = new Airplane(airplane);
                     }
                 }
                 flights.push(flight);

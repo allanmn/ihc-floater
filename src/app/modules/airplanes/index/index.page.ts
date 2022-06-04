@@ -51,10 +51,8 @@ export class IndexPage implements OnInit {
                 for (let airplane of data) {
                     this.airplanes.push(airplane);
                 }
-                console.log('aaa')
 
                 if (this.filters.name) {
-                    console.log('aaa')
                     this.airplanes.filter(a => a.modelo.match(this.filters.name))
                 }
             } else {

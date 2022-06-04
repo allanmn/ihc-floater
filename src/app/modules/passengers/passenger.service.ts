@@ -31,7 +31,6 @@ export class PassengerService {
 
                 while(!idOk) {
                     let id = Math.floor(Math.random() *100);
-                    console.log(id);
 
                     if (!passengers.find(a => a.id == id)) {
                         passenger.id = id;
