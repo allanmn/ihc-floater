@@ -14,8 +14,7 @@ export class AppComponent {
         { title: 'Dashboard', url: '/dashboard', icon: 'pie-chart' },
         { title: 'Aeronaves', url: '/airplanes', icon: 'airplane' },
         { title: 'Destinos', url: '/destinations', icon: 'map' },
-        { title: 'Passageiros', url: '/passengers', icon: 'people' },
-        { title: 'Passageiros Voô', url: '/passengersFlights', icon: 'people' },
+        { title: 'Passagens', url: '/passengersFlights', icon: 'people' },
         { title: 'Vôos', url: '/flights', icon: 'cloud' }
     ];
     constructor(

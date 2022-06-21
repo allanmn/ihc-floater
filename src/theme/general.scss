@@ -23,3 +23,13 @@ input {
 }
 .searchbar-search-icon { display:none !important; width:0; height:0; }
 .date-popover { --width: 320px };
+// Applies a text wrap on ion options
+.alert-tappable.alert-radio {
+    height: auto;
+    contain: content;
+}
+
+.alert-radio-label.sc-ion-alert-md,
+.alert-radio-label.sc-ion-alert-ios {
+    white-space: normal;
+}

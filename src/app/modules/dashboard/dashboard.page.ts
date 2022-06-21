@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AirPlaneService } from '../airplanes/airplane.service';
+import { FlightService } from '../flights/flight.service';
+import { PassengerFlightService } from '../passengersFlights/passengerFlight.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -13,9 +16,19 @@ export class DashboardPage implements OnInit {
         total_tickets: 0
     }
 
-    constructor() { }
+    constructor(
+        private flight_service: FlightService,
+        private airplane_service: AirPlaneService,
+        private passenger_flight_service: PassengerFlightService
+    ) { }
 
     ngOnInit() {
+    }
+
+    ionViewWillEnter() {
+        this.dashboard.total_flights = this.flight_service.get([]).length;
+        this.dashboard.total_planes = this.airplane_service.get().length;
+        this.dashboard.total_tickets = this.passenger_flight_service.get([],{}).length;
     }
 
 }

@@ -13,7 +13,12 @@ export class AirPlaneService {
     }
 
     get() {
-        return JSON.parse(localStorage.getItem('floater@airplanes'));
+        if (localStorage.getItem('floater@airplanes')) {
+            return JSON.parse(localStorage.getItem('floater@airplanes'));
+        } else {
+            return [];
+        }
+
     }
 
     find(id: number) {

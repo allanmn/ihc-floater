@@ -1,3 +1,5 @@
+import { Passenger } from "../passengers/passenger"
+
 export class PassengerFlight {
 
     id: number = null
@@ -8,6 +10,8 @@ export class PassengerFlight {
     solicitations: string = null
     payment_method: string = null
     payed_value: number = null
+
+    passenger: Passenger = new Passenger;
 
     constructor(data?: any){
         this.passenger_id = data?.passenger_id;

@@ -102,7 +102,9 @@ ion-icon[name="book"] {
   text-align: center;
 }
 .light{
-  background-color: #fff;
+  background-color: #fff !important;
+  border-radius: 5px;
+  padding: 0 10px
 }
 .btn{
   border-radius: 8px;

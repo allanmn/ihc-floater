@@ -6,6 +6,8 @@ import { Airplane } from '../../airplanes/airplane';
 import { AirPlaneService } from '../../airplanes/airplane.service';
 import { Destiny } from '../../destiny/destiny';
 import { DestinyService } from '../../destiny/destiny.service';
+import { PassengerFlight } from '../../passengersFlights/passengerFlight';
+import { PassengerFlightService } from '../../passengersFlights/passengerFlight.service';
 import { Flight } from '../flight';
 import { FlightService } from '../flight.service';
 
@@ -22,6 +24,7 @@ export class CreatePage implements OnInit {
     loading: boolean = true;
     loading_destinations: boolean = true;
     loading_airplanes: boolean = true;
+    loading_passengers: boolean = true;
 
     flight: Flight = new Flight;
 
@@ -30,11 +33,14 @@ export class CreatePage implements OnInit {
     destiny_id: string = null;
     airplane_id: string = null;
 
+    passengers: Array<PassengerFlight> = [];
+
     constructor(
         private airplane_service: AirPlaneService,
         private destiny_service: DestinyService,
         private flight_service: FlightService,
         private helper_service: HelperService,
+        private passenger_flight_service: PassengerFlightService,
         private route: ActivatedRoute,
         private router: Router
     ) {
@@ -86,15 +92,23 @@ export class CreatePage implements OnInit {
         if (!this.flight.id) {
             this.helper_service.toast('danger', 'Ocorreu um erro ao recuperar dados da aeronave')
         }
+
+        this.getPassengers();
+    }
+
+    getPassengers() {
+        this.passenger_flight_service.get(['passenger'], { flight_id: this.flight.id }).forEach(e => {
+            this.passengers.push(e);
+        });
+
+        this.loading_passengers = false;
     }
 
     save() {
-        if (!this.flight.valorPassagem) this.helper_service.toast('warning', 'Informe um valor da passagem.')
-        if (!this.flight.dataPartida) this.helper_service.toast('warning', 'Informe uma data de partida.')
-        if (!this.airplane_id) this.helper_service.toast('warning', 'Selecione uma aeronave.')
-        if (!this.destiny_id) this.helper_service.toast('warning', 'Selecione um destino.')
-
-        console.log(this.airplane_id,this.destiny_id)
+        if (!this.flight.valorPassagem || this.flight.valorPassagem === undefined) return this.helper_service.toast('warning', 'Informe um valor da passagem.')
+        if (!this.flight.dataPartida || this.flight.dataPartida === undefined) return this.helper_service.toast('warning', 'Informe uma data de partida.')
+        if (!this.airplane_id) return this.helper_service.toast('warning', 'Selecione uma aeronave.')
+        if (!this.destiny_id) return this.helper_service.toast('warning', 'Selecione um destino.')
 
         this.flight.airplane_id = Number(this.airplane_id);
         this.flight.destiny_id = Number(this.destiny_id);

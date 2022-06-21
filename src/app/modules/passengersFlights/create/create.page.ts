@@ -11,7 +11,6 @@ import { Passenger } from '../../passengers/passenger';
 import { Flight } from '../../flights/flight';
 
 import { CreatePassengerComponent } from '../../passengers/create/create.component';
-import { throwError } from 'rxjs';
 
 @Component({
     selector: 'app-create',
@@ -152,7 +151,7 @@ export class CreatePage implements OnInit {
                 return
             }
 
-            let passengers_flights = this.passenger_flight_service.get()
+            let passengers_flights = this.passenger_flight_service.get([],{})
             let isOccupied = passengers_flights ? passengers_flights.find((ticket) => ticket.flight_id===this.passenger_flight.flight_id && ticket.seatNumber===this.passenger_flight.seatNumber && ticket.seatType===this.passenger_flight.seatType) : null
             if(isOccupied){
                 this.helper_service.toast('danger', 'Assento já ocupado');
@@ -213,7 +212,7 @@ export class CreatePage implements OnInit {
     numberOnlyValidation(event: any) {
         const pattern = /[0-9.,]/;
         let inputChar = String.fromCharCode(event.charCode);
-    
+
         if (!pattern.test(inputChar)) {
           // invalid character, prevent input
           event.preventDefault();
